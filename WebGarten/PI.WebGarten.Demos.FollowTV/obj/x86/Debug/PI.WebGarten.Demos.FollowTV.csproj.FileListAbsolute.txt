@@ -1,0 +1,8 @@
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\bin\Debug\PI.WebGarten.Demos.FollowTV.exe.config
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\bin\Debug\PI.WebGarten.Demos.FollowTV.exe
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\bin\Debug\PI.WebGarten.Demos.FollowTV.pdb
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\bin\Debug\PI.WebGarten.dll
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\bin\Debug\PI.WebGarten.pdb
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\obj\x86\Debug\PI.WebGarten.Demos.FollowTV.exe
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Demos.FollowTV\obj\x86\Debug\PI.WebGarten.Demos.FollowTV.pdb

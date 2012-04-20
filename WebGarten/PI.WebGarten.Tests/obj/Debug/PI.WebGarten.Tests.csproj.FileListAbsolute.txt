@@ -1,0 +1,9 @@
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\bin\Debug\PI.WebGarten.Tests.dll
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\bin\Debug\PI.WebGarten.Tests.pdb
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\bin\Debug\nunit.framework.dll
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\bin\Debug\nunit.mocks.dll
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\bin\Debug\pnunit.framework.dll
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\bin\Debug\nunit.framework.xml
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\obj\Debug\ResolveAssemblyReference.cache
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\obj\Debug\PI.WebGarten.Tests.dll
+D:\ISEL0809\PI\2012\LI51N-G14\WebGarten\PI.WebGarten.Tests\obj\Debug\PI.WebGarten.Tests.pdb
