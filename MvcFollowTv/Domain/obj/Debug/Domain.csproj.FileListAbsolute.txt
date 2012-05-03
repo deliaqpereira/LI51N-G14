@@ -1,0 +1,7 @@
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\obj\Debug\ResolveAssemblyReference.cache
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\bin\Debug\Domain.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\bin\Debug\Domain.pdb
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\obj\Debug\Domain.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\obj\Debug\Domain.pdb
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\bin\Debug\DomainLocator.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\Domain\bin\Debug\DomainLocator.pdb

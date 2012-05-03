@@ -1,0 +1,11 @@
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\MvcFollowTv.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\MvcFollowTv.pdb
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\EntityFramework.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\EntityFramework.xml
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\obj\Debug\ResolveAssemblyReference.cache
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\obj\Debug\MvcFollowTv.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\obj\Debug\MvcFollowTv.pdb
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\Domain.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\Domain.pdb
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\DomainLocator.dll
+D:\ISEL0809\PI\2012\Repositorio\MvcFollowTv\MvcFollowTv\bin\DomainLocator.pdb
