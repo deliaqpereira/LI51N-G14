@@ -1,17 +1,40 @@
-﻿@model Domain.DomainEntity.ProgItem
+﻿@model IEnumerable<Domain.DomainEntity.ProgItem>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-<fieldset>
-    <legend>Program</legend>
-        <div class="display-label">Nome</div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Name)
-        </div>
-</fieldset>
+
 <p>
-    @Html.ActionLink("Back to List", "Index", "Home")
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Descr
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descr)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.Name} ) |
+            @Html.ActionLink("Episodes", "Episodes", new {  id=item.Name  }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+        </td>
+    </tr>
+}
+
+</table>

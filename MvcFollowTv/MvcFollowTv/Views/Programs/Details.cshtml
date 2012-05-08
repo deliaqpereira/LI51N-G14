@@ -1,0 +1,37 @@
+﻿@model Domain.DomainEntity.Episode
+
+@{
+    //ViewBag.controller = @ViewContext.Controller.ValueProvider.GetValue("controller").RawValue;
+    ViewBag.Title = "Details";
+
+}
+
+<h2>@ViewBag.Title</h2>
+
+<fieldset>
+    <legend>Episode</legend>
+
+    <div class="display-label">Title</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">Duration</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Duration)
+    </div>
+
+    <div class="display-label">StoryLine</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryLine)
+    </div>
+
+    <div class="display-label">Class</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Class)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

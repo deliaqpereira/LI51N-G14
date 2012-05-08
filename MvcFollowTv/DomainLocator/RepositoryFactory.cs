@@ -7,9 +7,15 @@ namespace DomainLocator
 {
     public class RepositoryFactory
     {
-        public static T GetInstance<T>()
+        public static T GetInstanceProgram<T>()
         {
             Type t = Config.ProgramRepositoryTypeName;
+            return (T)Activator.CreateInstance(t);
+        }
+
+        public static T GetInstanceSerie<T>()
+        {
+            Type t = Config.SerieRepositoryTypeName;
             return (T)Activator.CreateInstance(t);
         }
     }

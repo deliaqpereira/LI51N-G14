@@ -10,7 +10,7 @@ namespace Domain.DomainLogin
 {
     public class ProgramLogic
     {
-        private IProgramRepository _repository = RepositoryFactory.GetInstance<IProgramRepository>();
+        private IProgramRepository _repository = RepositoryFactory.GetInstanceProgram<IProgramRepository>();
 
         public ProgramLogic()
         {

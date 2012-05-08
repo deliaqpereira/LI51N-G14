@@ -42,10 +42,13 @@
   <ItemGroup>
     <Compile Include="DomainEntity\Episode.cs" />
     <Compile Include="DomainEntity\ProgItem.cs" />
+    <Compile Include="DomainEntity\Serie.cs" />
     <Compile Include="DomainLogin\ProgramLogic.cs" />
+    <Compile Include="DomainLogin\SerieLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryInterface\IEpisodeRepository.cs" />
     <Compile Include="RepositoryInterface\IProgramRepository.cs" />
+    <Compile Include="RepositoryInterface\ISerieRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainLocator\DomainLocator.csproj">

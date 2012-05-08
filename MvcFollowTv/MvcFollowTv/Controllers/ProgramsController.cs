@@ -11,15 +11,30 @@ namespace MvcFollowTv.Controllers
     public class ProgramsController : Controller
     {
 
-        private ProgramLogic _progLogic = new ProgramLogic();
+        private SerieLogic _progLogic = new SerieLogic();
 
         //
         // GET: /Programs/
         public ActionResult Index()
         {
-            IEnumerable<ProgItem> allProgs = _progLogic.GetAll();
+            IEnumerable<ProgItem> allProgs = _progLogic.GetAllPrograms();
 
             return View(allProgs);
+        }
+
+        public ActionResult Episodes(string id)
+        {
+
+            Serie serie = _progLogic.GetSerieByName(id);
+
+            return View(serie);
+        }
+
+        public ActionResult Details(string id, string title)
+        {
+            Episode p = _progLogic.GetCurrentEpisode(id, title);
+
+            return View(p);
         }
 
     }

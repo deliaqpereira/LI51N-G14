@@ -43,6 +43,7 @@
     <Compile Include="EpisodeMemoryRepository.cs" />
     <Compile Include="ProgramMemoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerieMemoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
