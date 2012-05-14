@@ -18,5 +18,11 @@ namespace DomainLocator
             Type t = Config.SerieRepositoryTypeName;
             return (T)Activator.CreateInstance(t);
         }
+
+        public static T GetInstanceUser<T>()
+        {
+            Type t = Config.UserRepositoryTypeName;
+            return (T)Activator.CreateInstance(t);
+        }
     }
 }

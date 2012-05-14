@@ -22,5 +22,13 @@ namespace DomainLocator
                 return Type.GetType("DAL.SerieMemoryRepository,DAL");
             }
         }
+
+        public static Type UserRepositoryTypeName
+        {
+            get
+            {
+                return Type.GetType("DAL.UserMemoryRepository,DAL");
+            }
+        }
     }
 }
