@@ -1,0 +1,27 @@
+﻿@model Domain.DomainEntity.User
+
+@{
+    ViewBag.Title = "AddImage";
+}
+
+<h2>Adicionar Imagem ao Utilizador</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+
+    @if (Model.Image == null)
+    {
+        <p>Submeter Imagem:</p>
+        using (Html.BeginForm("EditImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = Model.Nickname }))
+        {
+                    <input type="file" name="file" />
+                    <input class="btn primary" type="submit" value="OK" />
+        }
+    }
+    else
+    {
+            <img src="@Model.Image" id="@Model.Nickname" alt="@Model.Image"/>
+    }
+

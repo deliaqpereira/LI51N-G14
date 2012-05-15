@@ -8,7 +8,7 @@ namespace Domain.DomainEntity
 {
     public class User
     {
-        public static string[] Roles = { "Admin", "User" };
+        public static string[] Roles = { "Admin", "User", "Hold" };
         public string[] Role { get; set; }
 
 

@@ -24,7 +24,7 @@ namespace MvcFollowTv.Module
             // Below is an example of how you can handle LogRequest event and provide 
             // custom logging implementation for it
             //context.LogRequest += new EventHandler(OnLogRequest);
-            context.AuthenticateRequest += new EventHandler(OnAuthenticateRequest);
+           // context.AuthenticateRequest += new EventHandler(OnAuthenticateRequest);
         }
 
         #endregion

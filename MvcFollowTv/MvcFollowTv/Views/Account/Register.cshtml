@@ -10,7 +10,7 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true, "Por favor corrija os erros abaixo e tente novamente.")
     <fieldset>
         <legend>User</legend>
 
@@ -23,11 +23,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Image)
+            @Html.LabelFor(model => model.Email)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
-            @Html.ValidationMessageFor(model => model.Image)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
         </div>
 
         <div class="editor-label">
@@ -38,16 +38,8 @@
             @Html.ValidationMessageFor(model => model.Password)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Register" />
         </p>
     </fieldset>
 }

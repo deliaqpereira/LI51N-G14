@@ -6,9 +6,6 @@
 
 <h2>Admin</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
@@ -41,8 +38,7 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { nickname = item.Nickname }) |
             @Html.ActionLink("Delete", "Delete", new {  nickname=item.Nickname })
         </td>
     </tr>

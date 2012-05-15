@@ -1,7 +1,6 @@
 ﻿@model Domain.DomainEntity.User
 
 @{
-   // Layout = "~/Views/Shared/_LayoutForLogon.cshtml";
     ViewBag.Title = "LogOn";
 }
 
@@ -12,11 +11,6 @@
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-@if (TempData["activado"] !=null)
-{
-    <h2>User Checked, please use credentials to enter.</h2>
-}
-@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
 @using (Html.BeginForm())
 {
@@ -42,7 +36,7 @@
 
             <p>
                 <input type="submit" value="Log On" />
-                @Html.ActionLink("Register", "Register","Account" ) if you don't have an account.
+                @Html.ActionLink("Register", "Register", null,null ) if you don't have an account.
             </p>
         </fieldset>
     </div>

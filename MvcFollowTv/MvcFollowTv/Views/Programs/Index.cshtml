@@ -7,8 +7,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+@if (HttpContext.Current.User.IsInRole("admin") )
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
 </p>
+
 <table>
     <tr>
         <th>
@@ -29,11 +33,24 @@
         <td>
             @Html.DisplayFor(modelItem => item.Descr)
         </td>
+
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.Name} ) |
-            @Html.ActionLink("Episodes", "Episodes", new {  id=item.Name  }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+                @Html.ActionLink("Episodes", "Episodes", new { id = item.Name }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Name })
         </td>
+        }
+        
+        @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+        <td>
+                @Html.ActionLink("Episodes", "Episodes", new { id = item.Name }) 
+
+        </td>
+        }
+            
     </tr>
 }
 

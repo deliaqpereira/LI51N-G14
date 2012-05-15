@@ -88,16 +88,16 @@ namespace MvcFollowTv.Controllers
 
 
                         //Adicionar o user ao repository
-                        user.Role = new[] { "hold" };
+                        user.Role = new[] { "Hold" };
                         _userLogic.Add(user);
 
-                        return View("UserRegisterOK");
+                        return RedirectToAction("Index", "Programs");
                     }
                     catch (Exception ex)
                     {
                         Response.StatusCode = 401;//not authenticated
                         TempData["message"] = "O envio de Email falhou.{0}" + ex;
-                        return View("UserRegisterNotOK");
+                        return View();
                     }
                 }
                 {
@@ -144,7 +144,7 @@ namespace MvcFollowTv.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public ActionResult Admin()
         {
             return View(_userLogic.GetAll());
@@ -156,13 +156,11 @@ namespace MvcFollowTv.Controllers
             User u = _userLogic.GetByNickName(nickname);
             if (u != null)
             {
-               // ViewBag.roles = Models.User.Roles;
                 return View(u);
             }
             u = _userLogic.GetByNickName(User.Identity.Name);
             if (u != null)
             {
-              //  ViewBag.roles = Models.User.Roles;
                 return View(u);
             }
             return RedirectToAction("Admin", "Account");
@@ -194,27 +192,27 @@ namespace MvcFollowTv.Controllers
         }
 
         [Authorize]
-        public ActionResult addImg(String Nickname)
+        public ActionResult AddImage(String Nickname)
         {
-            User u = _userLogic.GetByNickName(HttpContext.User.Identity.Name);
+            User u = _userLogic.GetByNickName(Nickname);
             return View(u);
         }
 
         [Authorize]
-        public ActionResult RemoveUser(String Nickname)
+        public ActionResult Delete(String Nickname)
         {
             User u = _userLogic.GetByNickName(Nickname);
             if (User.IsInRole("Admin"))
             {
                 _userLogic.Remove(u.Nickname);
-                return View("UserRemovedOK");
+                return View("Admin");
             }
             if (User.Identity.Name == u.Nickname)
             {
                 _userLogic.Remove(u.Nickname);
-                HttpContext.Response.Cookies["user"].Expires = DateTime.Now;
-                System.Web.HttpContext.Current.User = new GenericPrincipal(new GenericIdentity("public"), new[] { "public" });
-                return View("UserRemovedOK");
+  
+                return RedirectToAction("Index", "Programs");
+
             } // Se se apagou a si proprio logoff
             return View("Error");
         }
