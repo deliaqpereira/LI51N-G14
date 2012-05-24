@@ -37,16 +37,31 @@
         <td>
             @Html.DisplayFor(modelItem => item.StoryLine)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.Title} ) |
-            @Html.ActionLink("Details", "Details", new { id = Model.progItem.Name, title = item.Title }) |
-            @Html.ActionLink("Delete", "Details", new { id = item.Title })
-        </td>
+
+            
+
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.Title} ) |
+                    @Html.ActionLink("Details", "Details", new { id = Model.progItem.Name, title = item.Title }) |
+                    @Html.ActionLink("Delete", "Details", new { id = item.Title })
+            </td>
+            }
+        
+            @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+            <td>
+                    @Html.ActionLink("Details", "Details", new { id = Model.progItem.Name, title = item.Title })  
+
+            </td>
+            }
+
     </tr>
 }
 
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.progItem.Name }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

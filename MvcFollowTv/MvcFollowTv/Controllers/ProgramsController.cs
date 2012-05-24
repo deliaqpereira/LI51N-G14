@@ -37,5 +37,13 @@ namespace MvcFollowTv.Controllers
             return View(p);
         }
 
+        public ActionResult Edit(string id)
+        {
+
+            Serie serie = _progLogic.GetSerieByName(id);
+
+            return View(serie);
+        }
+
     }
 }
