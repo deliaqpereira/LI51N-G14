@@ -1,0 +1,71 @@
+﻿@model Domain.DomainEntity.Serie
+
+@{
+    ViewBag.Title = "Episodes";
+}
+
+<h2>Programs Details</h2>
+    
+<div class="display-label">Name</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.progItem.Name)
+</div>
+
+<div class="display-label">Descricao</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.progItem.Descr)
+</div>
+
+
+<table>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            StoryLine
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.repo) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoryLine)
+        </td>
+
+            
+
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.Title} ) |
+                    @Html.ActionLink("Details", "Details", new { id = Model.progItem.Name, title = item.Title }) |
+                    @Html.ActionLink("Delete", "Details", new { id = item.Title })
+            </td>
+            }
+        
+            @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+            <td>
+                    @Html.ActionLink("Details", "Details", new { id = Model.progItem.Name, title = item.Title })  
+
+            </td>
+            }
+
+    </tr>
+}
+
+</table>
+<p>
+
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New Episode", "CreateEpisode")
+    }
+
+</p>

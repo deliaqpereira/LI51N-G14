@@ -1,0 +1,41 @@
+﻿@model Domain.DomainEntity.ProgItem
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Proposal</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>ProgItem</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descr)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descr)
+            @Html.ValidationMessageFor(model => model.Descr)
+        </div>
+
+        <p>
+            <input type="submit" value="Save Proposal" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
