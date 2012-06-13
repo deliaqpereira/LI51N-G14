@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Domain.DomainEntity;
-using Domain.DomainLogin;
 using System.Web.Helpers;
 using MvcFollowTv.Secure;
 using System.IO;
-using System.Security.Principal;
+using MvcFollowTv;
 
 namespace MvcFollowTv.Controllers
 {
     public class AccountController : Controller
     {
-        private UserLogic _userLogic = new UserLogic();
+        
         //
         // GET: /Account/
 
@@ -29,7 +26,7 @@ namespace MvcFollowTv.Controllers
         {
             if (ModelState.IsValid)
             {
-                User u = _userLogic.GetByNickName(user.Nickname);
+                User u = MvcApplication._userLogic.GetByNickName(user.Nickname);
                 if (u != null && u.Password == user.Password)
                 {
                     //create ticket
@@ -66,7 +63,7 @@ namespace MvcFollowTv.Controllers
 
             if (ModelState.IsValid)
             {
-                User u = _userLogic.GetByNickName(user.Nickname);
+                User u = MvcApplication._userLogic.GetByNickName(user.Nickname);
                 if (u == null)
                 {
                     try
@@ -89,7 +86,7 @@ namespace MvcFollowTv.Controllers
 
                         //Adicionar o user ao repository
                         user.Role = new[] { "Hold" };
-                        _userLogic.Add(user);
+                        MvcApplication._userLogic.Add(user);
 
                         return RedirectToAction("Index", "Programs");
                     }
@@ -119,7 +116,7 @@ namespace MvcFollowTv.Controllers
                     u = Hash64.base64Decode(u);
                     hash = Hash64.base64Decode(hash);
 
-                    User usr = _userLogic.GetByNickName(u);
+                    User usr = MvcApplication._userLogic.GetByNickName(u);
 
                     if (usr != null && usr.activate(hash))
                     {
@@ -147,18 +144,18 @@ namespace MvcFollowTv.Controllers
       //  [Authorize(Roles = "Admin")]
         public ActionResult Admin()
         {
-            return View(_userLogic.GetAll());
+            return View(MvcApplication._userLogic.GetAll());
         }
 
         [Authorize]
         public ActionResult Edit(String nickname)
         {
-            User u = _userLogic.GetByNickName(nickname);
+            User u = MvcApplication._userLogic.GetByNickName(nickname);
             if (u != null)
             {
                 return View(u);
             }
-            u = _userLogic.GetByNickName(User.Identity.Name);
+            u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
             if (u != null)
             {
                 return View(u);
@@ -176,7 +173,7 @@ namespace MvcFollowTv.Controllers
         [HttpPost]
         public ActionResult EditImage(HttpPostedFileBase file)
         {
-            User u = _userLogic.GetByNickName(HttpContext.User.Identity.Name);
+            User u = MvcApplication._userLogic.GetByNickName(HttpContext.User.Identity.Name);
             // Verify that the user selected a file
             if (file != null && file.ContentLength > 0)
             {
@@ -194,22 +191,22 @@ namespace MvcFollowTv.Controllers
         [Authorize]
         public ActionResult AddImage(String Nickname)
         {
-            User u = _userLogic.GetByNickName(Nickname);
+            User u = MvcApplication._userLogic.GetByNickName(Nickname);
             return View(u);
         }
 
         [Authorize]
         public ActionResult Delete(String Nickname)
         {
-            User u = _userLogic.GetByNickName(Nickname);
+            User u = MvcApplication._userLogic.GetByNickName(Nickname);
             if (User.IsInRole("Admin"))
             {
-                _userLogic.Remove(u.Nickname);
+                MvcApplication._userLogic.Remove(u.Nickname);
                 return View("Admin");
             }
             if (User.Identity.Name == u.Nickname)
             {
-                _userLogic.Remove(u.Nickname);
+                MvcApplication._userLogic.Remove(u.Nickname);
   
                 return RedirectToAction("Index", "Programs");
 

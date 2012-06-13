@@ -6,13 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-@if (HttpContext.Current.User.IsInRole("admin") )
-    {
-        @Html.ActionLink("Create New", "Create")
-    }
-</p>
-
 <table>
     <tr>
         <th>
@@ -55,3 +48,10 @@
 }
 
 </table>
+
+<p>
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>

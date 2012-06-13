@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Domain.DomainLogin;
 
 namespace MvcFollowTv
 {
@@ -12,6 +13,11 @@ namespace MvcFollowTv
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static readonly UserLogic _userLogic = new UserLogic();
+        public static readonly SerieLogic _progLogic = new SerieLogic();
+        public static readonly SuggestSerieLogic _suggest = new SuggestSerieLogic();
+
+
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
@@ -42,5 +48,6 @@ namespace MvcFollowTv
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
+
     }
 }

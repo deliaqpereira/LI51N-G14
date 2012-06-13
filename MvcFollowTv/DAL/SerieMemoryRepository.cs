@@ -65,7 +65,10 @@ namespace DAL
             {
               //  _repoProgram.Add(p);
                 dicEpisodes = new EpisodeMemoryRepository();
-                dicEpisodes.Add(e);
+                
+                if (e != null)
+                    dicEpisodes.Add(e);
+
                 _serie.Add(p, dicEpisodes);
             }
             else
