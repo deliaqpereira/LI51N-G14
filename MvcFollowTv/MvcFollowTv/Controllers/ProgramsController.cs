@@ -15,10 +15,56 @@ namespace MvcFollowTv.Controllers
         // GET: /Programs/
         public ActionResult Index()
         {
+            return View();
+        }
+
+        //
+        // GET: /Programs/
+        public ActionResult IndexNormal()
+        {
             IEnumerable<ProgItem> allProgs = MvcApplication._progLogic.GetAllPrograms();
 
             return View(allProgs);
         }
+
+        //
+        // GET: /Programs/
+        public ActionResult IndexWithPage(int? page, int? pagesize)
+        {
+            if (pagesize == null)
+            {
+                pagesize = 5;
+            }
+            if (page == null)
+            {
+                return RedirectToAction("IndexWithPage", new { page = "0", pagesize });
+            }
+
+            ViewBag.lastpage = MvcApplication._progLogic.TotalPages((int)pagesize);
+            FillViewBag((int)page, (int)pagesize);
+            if (ViewBag.lastpage < page)
+                return RedirectToAction("IndexWithPage", new { page = ViewBag.lastpage, pagesize });
+            if (page < 0)
+                return RedirectToAction("IndexWithPage", new { page = "0", pagesize });
+
+            return View(MvcApplication._progLogic.GetInterval((int)page, (int)pagesize));
+
+        }
+
+        private void FillViewBag(int page, int pagesize)
+        {
+            ViewBag.pagesize = pagesize;
+            ViewBag.lastpage--;
+            ViewBag.nextpage = page < ViewBag.lastpage ? (page + 1) : ViewBag.lastpage;
+            ViewBag.prevpage = page <= 0 ? -1 : (page - 1);
+            ViewBag.page = page;
+        }
+
+        public ActionResult IntervalPage(int page, int pagesize)
+        {
+            return View("_InnerPage", MvcApplication._progLogic.GetInterval(page, pagesize));
+        }
+
 
         public ActionResult Episodes(string id)
         {
@@ -46,7 +92,6 @@ namespace MvcFollowTv.Controllers
         [HttpPost]
         public ActionResult Edit(Serie p)
         {
-
            // Serie serie = _progLogic.GetSerieByName(id);
             UpdateModel<Serie>(p);
 
@@ -74,9 +119,28 @@ namespace MvcFollowTv.Controllers
             return RedirectToAction("ListProposal");
         }
 
-        public ActionResult CreateEpisode()
+        public ActionResult CreateEpisode(string name)
         {
+            User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
+            Serie s = MvcApplication._suggest.GetSerie(u, name);
+
+            ViewBag.Index = s.progItem.Name;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateEpisode(string name, Episode e)
+        {
+           // p.UsrCreate = User.Identity.Name;
+           // User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
+
+            //actualizar o repositorio de propostas
+            if (e.Title == null)
+                e = null;
+
+            //MvcApplication._suggest.Add(u, p, e);
+
+            return RedirectToAction("ListProposal");
         }
 
         public ActionResult ListProposal()

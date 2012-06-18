@@ -41,6 +41,18 @@ namespace Domain.DomainLogin
             return _repository.GetAllPrograms();
         }
 
+        public int TotalPages(int recordsPerPage)
+        {
+            var nr = _repository.GetAllPrograms().Count<ProgItem>() / (double)recordsPerPage;
+            return (int)Math.Ceiling(nr);
+        }
+
+        public IEnumerable<ProgItem> GetInterval(int page, int recordsPerPage)
+        {
+            int skip = (page) * recordsPerPage;
+            return _repository.GetAllPrograms().Skip(skip).Take(recordsPerPage);
+        }
+
         public ProgItem GetCurrentProgram(string name)
         {
             return _repository.GetProgramByName(name);
@@ -93,6 +105,63 @@ namespace Domain.DomainLogin
             Add(p1, e11);
             Add(p1, e21);
             Add(p1, e31);
+
+            ///////////////////////////////////////////////////////////////////////////
+            ProgItem p2 = new ProgItem { Name = "Agente Dupla", Descr = "Serie Policial" };
+            Episode e12 = new Episode { Title = "Episodio1- Agente Dupla" };
+            Episode e22 = new Episode { Title = "Episodio2- Agente Dupla" };
+            Episode e32 = new Episode { Title = "Episodio3- Agente Dupla" };
+
+            Add(p2, e12);
+            Add(p2, e22);
+            Add(p2, e32);
+
+            ProgItem p3 = new ProgItem { Name = "Chicago Code", Descr = "Serie Policial" };
+            Episode e13 = new Episode { Title = "Episodio1- Chicago Code" };
+            Episode e23 = new Episode { Title = "Episodio2- Chicago Code" };
+            Episode e33 = new Episode { Title = "Episodio3- Chicago Code" };
+
+            Add(p3, e13);
+            Add(p3, e23);
+            Add(p3, e33);
+
+            //////////////////////////////////////////////////////////////////////
+            ProgItem p4 = new ProgItem { Name = "Agente Dupla", Descr = "Serie Policial" };
+            Episode e14 = new Episode { Title = "Episodio1- Agente Dupla" };
+            Episode e24 = new Episode { Title = "Episodio2- Agente Dupla" };
+            Episode e34 = new Episode { Title = "Episodio3- Agente Dupla" };
+
+            Add(p4, e14);
+            Add(p4, e24);
+            Add(p4, e34);
+
+            ProgItem p5 = new ProgItem { Name = "Hawai Forca Especial", Descr = "Serie Policial" };
+            Episode e15 = new Episode { Title = "Episodio1- Hawai Forca Especial" };
+            Episode e25 = new Episode { Title = "Episodio2- Hawai Forca Especial" };
+            Episode e35 = new Episode { Title = "Episodio3- Hawai Forca Especial" };
+
+            Add(p5, e15);
+            Add(p5, e25);
+            Add(p5, e35);
+
+            //////////////////////////////////////////////////////////////////////
+            ProgItem p6 = new ProgItem { Name = "Family Guy", Descr = "Animação" };
+            Episode e16 = new Episode { Title = "Episodio1- Family Guy" };
+            Episode e26 = new Episode { Title = "Episodio2- Family Guy" };
+            Episode e36 = new Episode { Title = "Episodio3- Family Guy" };
+
+            Add(p6, e16);
+            Add(p6, e26);
+            Add(p6, e36);
+
+            ProgItem p7 = new ProgItem { Name = "American Dad", Descr = "Animação" };
+            Episode e17 = new Episode { Title = "Episodio1- American Dad" };
+            Episode e27 = new Episode { Title = "Episodio2- American Dad" };
+            Episode e37 = new Episode { Title = "Episodio3- American Dad" };
+
+            Add(p7, e17);
+            Add(p7, e27);
+            Add(p7, e37);
         }
     }
 }

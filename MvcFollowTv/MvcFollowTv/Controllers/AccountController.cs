@@ -30,14 +30,31 @@ namespace MvcFollowTv.Controllers
                 if (u != null && u.Password == user.Password)
                 {
                     //create ticket
-                    FormsAuthentication.SetAuthCookie(user.Nickname, false);
+                    // FormsAuthentication.SetAuthCookie(user.Nickname, false);
+
+                    //encriptacao
+                    string hashName = Hash64.base64Encode(user.Nickname);
+
+                    if (HttpContext.Request.Cookies["public"] != null)
+                    {
+                        HttpContext.Response.Cookies["public"].Expires = DateTime.Now;
+                        HttpContext.Request.Cookies.Remove("public");
+                    }
+                    //set cookie and redirect to user page
+                    HttpCookie cookie = new HttpCookie("user", hashName);
+
+                    HttpContext.Response.Cookies.Add(cookie);
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
+
                     return RedirectToAction("Index", "Programs"); // mostra a view com a lista de programas
                 }
                 else
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect");
                     return View(); // retorna para a mesma view com o campo password assinalado
-
                 }
 
             }
@@ -47,7 +64,12 @@ namespace MvcFollowTv.Controllers
 
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
+           //FormsAuthentication.SignOut();
+
+            if (HttpContext.Request.Cookies["user"] != null)
+            {
+                HttpContext.Response.Cookies["user"].Expires = DateTime.Now;
+            }
            
             return RedirectToAction("Index", "Programs");
         }

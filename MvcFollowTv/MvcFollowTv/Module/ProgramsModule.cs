@@ -2,6 +2,8 @@
 using System;
 using System.Web.Security;
 using System.Security.Principal;
+using MvcFollowTv.Secure;
+using Domain.DomainEntity;
 
 namespace MvcFollowTv.Module
 {
@@ -24,31 +26,60 @@ namespace MvcFollowTv.Module
             // Below is an example of how you can handle LogRequest event and provide 
             // custom logging implementation for it
             //context.LogRequest += new EventHandler(OnLogRequest);
-           // context.AuthenticateRequest += new EventHandler(OnAuthenticateRequest);
+            context.AuthenticateRequest += new EventHandler(OnAuthenticateRequest);
         }
 
         #endregion
 
         public void OnAuthenticateRequest(Object source, EventArgs args)
         {
+            //custom Authentication logic can go here
+            var app = source as HttpApplication;
 
-            if (HttpContext.Current.User != null)
+            HttpRequest req = app.Context.Request;
+            HttpResponse rep = app.Context.Response;
+
+            //empty cookie goes to Login
+            if (req.Cookies.Count == 0)
             {
-                if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    if (HttpContext.Current.User.Identity is FormsIdentity)
-                    {
-                        FormsIdentity id =
-                            (FormsIdentity)HttpContext.Current.User.Identity;
-                        FormsAuthenticationTicket ticket = id.Ticket;
+                //set temp cookie
+                string publicName = Hash64.base64Encode("public");
+                HttpCookie c = new HttpCookie("public", publicName);
+                c.Expires = DateTime.Now.AddMinutes(30);
+                HttpContext.Current.Response.Cookies.Add(c);
+                HttpContext.Current.User = new GenericPrincipal(new GenericIdentity("public"), new[] { "public" });
 
-                        // Get the stored user-data, in this case, our roles
-                        string userData = ticket.UserData;
-                        string[] roles = userData.Split(',');
-                        HttpContext.Current.User = new GenericPrincipal(id, roles);
-                    }
-                }
+                //redirect to base
+                rep.Redirect("/");
             }
+            //get cookie
+            HttpCookie cookie = req.Cookies["user"];
+            if (cookie != null)
+            {
+                //desencriptacao
+                string userName = Hash64.base64Decode(cookie.Value);
+                User u = MvcApplication._userLogic.GetByNickName(userName);
+
+                if (u != null)
+                    HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(userName), u.Role);
+            }
+            //if (HttpContext.Current.User != null)
+            //{
+            //    if (HttpContext.Current.User.Identity.IsAuthenticated)
+            //    {
+            //        if (HttpContext.Current.User.Identity is FormsIdentity)
+            //        {
+            //            FormsIdentity id =(FormsIdentity)HttpContext.Current.User.Identity;
+                            
+            //            FormsAuthenticationTicket ticket = id.Ticket;
+
+            //            // Get the stored user-data, in this case, our roles
+            //            string userData = ticket.UserData;
+            //            string[] roles = userData.Split(',');
+            //            HttpContext.Current.User = new GenericPrincipal(id, roles);
+            //        }
+            //    }
+            //}
 
 
             

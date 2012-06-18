@@ -108,6 +108,7 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jscriptMethod.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Web.config" />
@@ -182,6 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Programs\CreateEpisode.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programs\IndexNormal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programs\IndexWithPage.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

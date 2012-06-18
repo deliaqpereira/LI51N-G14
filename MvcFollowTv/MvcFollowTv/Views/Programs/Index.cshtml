@@ -1,57 +1,8 @@
-﻿@model IEnumerable<Domain.DomainEntity.ProgItem>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Todas as Fucs";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.index</h2>
 
-<table>
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Descr
-        </th>
-
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descr)
-        </td>
-
-        @if (HttpContext.Current.User.Identity.IsAuthenticated)
-        {
-        <td>
-                @Html.ActionLink("Episodes", "Episodes", new { id = item.Name }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Name })
-        </td>
-        }
-        
-        @if (!HttpContext.Current.User.Identity.IsAuthenticated)
-        {
-        <td>
-                @Html.ActionLink("Episodes", "Episodes", new { id = item.Name }) 
-
-        </td>
-        }
-            
-    </tr>
-}
-
-</table>
-
-<p>
-@if (HttpContext.Current.User.Identity.IsAuthenticated)
-    {
-        @Html.ActionLink("Create New", "Create")
-    }
-</p>
+    @Html.ActionLink("List Programs", "IndexNormal", "Programs", null, new { @class = "btn" })
+    @Html.ActionLink("List programs with pagination", "IndexWithPage", "Programs", null, new { @class = "btn" })

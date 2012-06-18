@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Domain.DomainEntity.ProgItem>
+@{
+    ViewBag.Title = "IndexWithPage";
+}
+
+<h2>IndexWithPage</h2>
+
+<script type="text/javascript">
+    var page;
+    var pagesize = 5;
+    var nextpage;
+    var prevpage;
+    var lastpage;
+    window.onload = function () {
+        init();
+        setdisabled();
+    };
+
+    var init = function() {
+        document.getElementById("first").href = "javascript:GetPageAjax('first')";
+        document.getElementById("last").href = "javascript:GetPageAjax('last')";
+    };
+
+</script>
+
+<h2>@ViewBag.index</h2>
+<p>
+    @Html.ActionLink("1", "IndexWithPage", "Programs", new { page = "0", pagesize = "1" }, new { @class = "link btn large", id = "val1", onclick = string.Format("sizePageAjax({0});", "1") })
+    @Html.ActionLink("5", "IndexWithPage", "Programs", new { page = "0", pagesize = "5" }, new { @class = "link btn large", id = "val5", onclick = string.Format("sizePageAjax({0});", "5") })
+    @Html.ActionLink("10", "IndexWithPage", "Programs", new { page = "0", pagesize = "10" }, new { @class = "link btn large", id = "val10", onclick = string.Format("sizePageAjax({0});", "10") })
+    @Html.ActionLink("15", "IndexWithPage", "Programs", new { page = "0", pagesize = "15" }, new { @class = "link btn large", id = "val15", onclick = string.Format("sizePageAjax({0});", "15") })
+</p>
+<div class="pagination">
+    <ul>
+      <li class="home">@Html.ActionLink("First", "IndexWithPage", "Programs", new { page = "0", ViewBag.pagesize }, new { @class = "link btn large", id = "first" })</li>
+      <li class="prev">@Html.ActionLink("Prev ", "IndexWithPage", "Programs", new { page = ViewBag.nextpage, ViewBag.pagesize }, new { @class = "link btn large", id = "prev" })</li>
+      <li class="next">@Html.ActionLink("Next ", "IndexWithPage", "Programs", new { page = ViewBag.nextpage, ViewBag.pagesize }, new { @class = "link btn large", id = "next" })</li>
+      <li class="last">@Html.ActionLink("Last", "IndexWithPage", "Programs", new { page = ViewBag.lastpage, ViewBag.pagesize }, new { @class = "link btn large", id = "last" })</li>
+      
+    </ul>
+    </div>

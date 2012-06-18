@@ -65,7 +65,7 @@
 
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        @Html.ActionLink("Create New Episode", "CreateEpisode")
+        @Html.ActionLink("Create New Episode", "CreateEpisode", new {name = Model.progItem.Name})
     }
 
 </p>
