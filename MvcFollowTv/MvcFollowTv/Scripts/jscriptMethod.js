@@ -1,14 +1,38 @@
 ﻿function getPage(size)
 {
+    alert("getpage");
     window.pagesize = size;
-    getPageAjax(0);
+    GetPageAjax(0);
 };
 
-function setdisabled()
+function setdisabled() 
 {
+    var elem;
+    if (page != 0) {
+        elem = $("#prev"); //jQuery Selects a single element with the given id attribute.
+        elem.removeClass('disabled');
+        elem = document.getElementById("prev");
+        elem.href = "javascript:GetPageAjax('prev')";
+    } else {
+        elem = $("#prev");  //jQuery Selects a single element with the given id attribute.
+        elem.addClass('disabled');
+        elem = document.getElementById("prev");
+        elem.href = "javascript:void(0)";
+    }
+    if (page != lastpage) {
+        elem = $("#next");  //jQuery Selects a single element with the given id attribute.
+        elem.removeClass('disabled');
+        elem = document.getElementById("next");
+        elem.href = "javascript:GetPageAjax('next')";
+    } else {
+        elem = $("#next");  //jQuery Selects a single element with the given id attribute.
+        elem.addClass('disabled');
+        elem = document.getElementById("next");
+        elem.href = "javascript:void(0)";
+    }
 };
 
-function getPageAjax(pageBtn) 
+function GetPageAjax(pageBtn)
 {
     if (pageBtn == "prev" && page > 0)
     {
@@ -20,8 +44,8 @@ function getPageAjax(pageBtn)
         page++;
     }
 
-    if (pageBtn == "first")
-    {
+    if (pageBtn == "first") 
+    {   
         page = 0;
     }
 
@@ -38,7 +62,7 @@ function getPageAjax(pageBtn)
         setdisabled();
         var cache = page;
         window.history.pushState(cache, "Page" + page, "/Programs/IndexWithPage?page=" + page + "&pagesize=" + pagesize);
-        document.getElementById("active").textContent = page;
+        document.getElementById("currentPage").textContent = page;
         $("#main").html(input);
     }
 
@@ -61,7 +85,7 @@ function getPageAjax(pageBtn)
 
     var pageopen = "IntervalPage";
 
-    xmlhttp.open("GET", "/" + controller + "/" + pageopen + "?page=" + page + "&pagesize=" + pagesize, true);
+    xmlhttp.open("GET", "/" + "Programs" + "/" + pageopen + "?page=" + page + "&pagesize=" + pagesize, true);
     xmlhttp.send();
 
 

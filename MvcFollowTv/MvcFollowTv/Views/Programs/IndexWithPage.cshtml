@@ -16,7 +16,12 @@
         setdisabled();
     };
 
-    var init = function() {
+    var init = function () {
+        page = @ViewBag.page;
+        nextpage = @ViewBag.nextpage;
+        prevpage = @ViewBag.prevpage;
+        lastpage = @ViewBag.lastpage;
+        pagesize = @ViewBag.pagesize;
         document.getElementById("first").href = "javascript:GetPageAjax('first')";
         document.getElementById("last").href = "javascript:GetPageAjax('last')";
     };
@@ -25,17 +30,40 @@
 
 <h2>@ViewBag.index</h2>
 <p>
-    @Html.ActionLink("1", "IndexWithPage", "Programs", new { page = "0", pagesize = "1" }, new { @class = "link btn large", id = "val1", onclick = string.Format("sizePageAjax({0});", "1") })
-    @Html.ActionLink("5", "IndexWithPage", "Programs", new { page = "0", pagesize = "5" }, new { @class = "link btn large", id = "val5", onclick = string.Format("sizePageAjax({0});", "5") })
-    @Html.ActionLink("10", "IndexWithPage", "Programs", new { page = "0", pagesize = "10" }, new { @class = "link btn large", id = "val10", onclick = string.Format("sizePageAjax({0});", "10") })
-    @Html.ActionLink("15", "IndexWithPage", "Programs", new { page = "0", pagesize = "15" }, new { @class = "link btn large", id = "val15", onclick = string.Format("sizePageAjax({0});", "15") })
+    @Html.ActionLink("1", "IndexWithPage", "Programs", new { page = "0", pagesize = "1" }, new { @class = "link btn large", id = "val1", onclick = string.Format("getPage({0});", "1") })
+    @Html.ActionLink("5", "IndexWithPage", "Programs", new { page = "0", pagesize = "5" }, new { @class = "link btn large", id = "val5", onclick = string.Format("getPage({0});", "5") })
+    @Html.ActionLink("10", "IndexWithPage", "Programs", new { page = "0", pagesize = "10" }, new { @class = "link btn large", id = "val10", onclick = string.Format("getPage({0});", "10") })
+    @Html.ActionLink("15", "IndexWithPage", "Programs", new { page = "0", pagesize = "15" }, new { @class = "link btn large", id = "val15", onclick = string.Format("getPage({0});", "15") })
 </p>
+
+@Html.Partial("_PageRecords")
+
 <div class="pagination">
     <ul>
-      <li class="home">@Html.ActionLink("First", "IndexWithPage", "Programs", new { page = "0", ViewBag.pagesize }, new { @class = "link btn large", id = "first" })</li>
-      <li class="prev">@Html.ActionLink("Prev ", "IndexWithPage", "Programs", new { page = ViewBag.nextpage, ViewBag.pagesize }, new { @class = "link btn large", id = "prev" })</li>
-      <li class="next">@Html.ActionLink("Next ", "IndexWithPage", "Programs", new { page = ViewBag.nextpage, ViewBag.pagesize }, new { @class = "link btn large", id = "next" })</li>
+      <li class="first">@Html.ActionLink("First", "IndexWithPage", "Programs", new { page = "0", ViewBag.pagesize }, new { @class = "link btn large", id = "first" })</li>
+      
+       @if (@ViewBag.prevpage != -1)
+       {
+            <li class="prev">@Html.ActionLink("Prev", "IndexWithPage", "Programs", new { page = ViewBag.prevpage, ViewBag.pagesize }, new { @class = "link btn large", id = "prev" })</li>
+       }
+       else
+       {
+            <li class="prev"><a id="prev" class="link btn large disabled" href="">Prev</a></li>
+       }
+
+
+      <li ><a id="currentPage">@ViewBag.page</a></li>
+
+       @if (@ViewBag.lastpage != ViewBag.page || ViewBag.lastpage == -1)
+        {
+            <li class="next">@Html.ActionLink("Next ", "IndexWithPage", "Programs", new { page = ViewBag.nextpage, ViewBag.pagesize }, new { @class = "link btn large", id = "next" })</li>
+        }
+        else
+        {
+            <li class="next"><a id="next" class="link btn large disabled" href="">Next</a></li>
+        }
+
       <li class="last">@Html.ActionLink("Last", "IndexWithPage", "Programs", new { page = ViewBag.lastpage, ViewBag.pagesize }, new { @class = "link btn large", id = "last" })</li>
       
     </ul>
-    </div>
+</div>

@@ -62,7 +62,7 @@ namespace MvcFollowTv.Controllers
 
         public ActionResult IntervalPage(int page, int pagesize)
         {
-            return View("_InnerPage", MvcApplication._progLogic.GetInterval(page, pagesize));
+            return View("_PageRecords", MvcApplication._progLogic.GetInterval(page, pagesize));
         }
 
 
