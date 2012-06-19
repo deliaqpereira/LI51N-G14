@@ -5,10 +5,20 @@
 
 @model IEnumerable<Domain.DomainEntity.ProgItem>
 <table id="main">
+    <thead>
+        <tr>
+            <th>
+                <b><a href="javascript:ordena(0)">Nome</a></b>
+            </th>
+            <th>
+                <b><a href="javascript:ordena(1)">Descricao</a></b>
+            </th>
+        </tr>
+    </thead>
 @foreach (var item in Model) {
-    <tr>
+    <tr class="items" id="@item.Name">
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(item.Name, "Episodes", new { id = item.Name })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Descr)
