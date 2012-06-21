@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "IndexWithScroll";
+}
+
+<h2>ReportWithScroll</h2>
+
+<script type="text/javascript">
+    var page = 0;
+    var pagesize = @ViewBag.pagesize;
+    var lastpage = @ViewBag.lastpage;
+    window.onload = function() {
+        document.getElementById("scroll").onscroll = scrollFunction;
+    };
+</script>
+
+<div id="scroll" style="height: 200px; overflow-y: scroll;overflow-x: hidden;-ms-overflow-x: hidden;-ms-overflow-y:scroll;">
+@Html.Partial("_PageRecords")
+</div>

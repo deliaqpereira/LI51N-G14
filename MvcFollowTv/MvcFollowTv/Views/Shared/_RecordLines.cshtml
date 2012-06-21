@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_NoLayout.cshtml";
+}
+
+@model IEnumerable<Domain.DomainEntity.ProgItem>
+
+@foreach (var item in Model)
+{
+    <tr class="items" id="@item.Name">
+        <td>
+            @Html.ActionLink(item.Name, "Episodes", new { id = item.Name })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descr)
+        </td>
+
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Episodes", "Episodes", new { id = item.Name }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Name }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Name })
+            </td>
+        }
+        
+        @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Episodes", "Episodes", new { id = item.Name }) 
+
+            </td>
+        }
+            
+    </tr>
+}

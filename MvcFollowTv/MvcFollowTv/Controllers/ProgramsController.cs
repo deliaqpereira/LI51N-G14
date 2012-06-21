@@ -51,6 +51,18 @@ namespace MvcFollowTv.Controllers
 
         }
 
+
+        // GET: /Programs/
+        public ActionResult IndexWithScroll()
+        {
+            const int pagesize = 5;
+            const int page = 0;
+            ViewBag.lastpage = MvcApplication._progLogic.TotalPages(pagesize);
+            FillViewBag(page,pagesize);
+            return View(MvcApplication._progLogic.GetInterval(page, pagesize));
+
+        }
+
         private void FillViewBag(int page, int pagesize)
         {
             ViewBag.pagesize = pagesize;
@@ -63,6 +75,11 @@ namespace MvcFollowTv.Controllers
         public ActionResult IntervalPage(int page, int pagesize)
         {
             return View("_PageRecords", MvcApplication._progLogic.GetInterval(page, pagesize));
+        }
+
+        public ActionResult RecordLines(int page, int pagesize)
+        {
+            return View("_RecordLines", MvcApplication._progLogic.GetInterval(page, pagesize));
         }
 
 

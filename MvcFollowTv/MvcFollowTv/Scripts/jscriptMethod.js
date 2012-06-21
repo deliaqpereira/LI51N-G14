@@ -110,12 +110,10 @@ function ordena(col)
 
     if (asc)
     {
-        alert("asc");
         valor = valor.sort(AscendentSort("orderby"));
     }
-    else {
-
-        alert("desc");
+    else 
+    {
         valor = valor.sort(DescendentSort("orderby"));
     }
 
@@ -140,4 +138,39 @@ function DescendentSort(property) {
     return function (a, b) {
         return (a[property] > b[property]) ? -1 : (a[property] < b[property]) ? 1 : 0;
     };
+}
+
+
+function scrollFunction() {
+    
+    //detecta scroll
+    var div = document.getElementById("scroll");
+    var divscrolltop = div.scrollTop;
+    if (div.clientHeight + divscrolltop - div.scrollHeight == 0)
+    {
+        page++;
+        function pagecallback(xmlhttp) {
+            var input = xmlhttp.responseText;
+            $("#main").append(input);
+        }
+
+
+        if (XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                pagecallback(xmlhttp);
+            }
+        };
+
+        var pageopen = "RecordLines";
+
+        xmlhttp.open("GET", "/" + "Programs" + "/" + pageopen + "?page=" + page + "&pagesize=" + pagesize, true);
+        xmlhttp.send();
+    }
 }
