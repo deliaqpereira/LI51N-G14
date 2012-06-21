@@ -53,6 +53,16 @@ namespace Domain.DomainLogin
             return _repository.GetAllPrograms().Skip(skip).Take(recordsPerPage);
         }
 
+
+        public IEnumerable<String> GetSearchResult(string filter)
+        {
+            filter = filter.ToUpper();
+            IEnumerable<ProgItem> query = _repository.GetAllPrograms().Where<ProgItem>(c => c.Name.ToUpper().StartsWith(filter));
+            IEnumerable<String> query1 = query.Select(c => c.Name);
+            return query1;
+            
+        }
+
         public ProgItem GetCurrentProgram(string name)
         {
             return _repository.GetProgramByName(name);
@@ -162,6 +172,16 @@ namespace Domain.DomainLogin
             Add(p7, e17);
             Add(p7, e27);
             Add(p7, e37);
+
+            ////////////////////////////////////////////////////////////////////////
+            ProgItem p8 = new ProgItem { Name = "Agente Dupla-2ª Temporada", Descr = "Serie Policial" };
+            Episode e18 = new Episode { Title = "Episodio1- Agente Dupla - 2ª Temporada" };
+            Episode e28 = new Episode { Title = "Episodio2- Agente Dupla - 2ª Temporada" };
+            Episode e38 = new Episode { Title = "Episodio3- Agente Dupla - 2ª Temporada" };
+
+            Add(p8, e18);
+            Add(p8, e28);
+            Add(p8, e38);
         }
     }
 }

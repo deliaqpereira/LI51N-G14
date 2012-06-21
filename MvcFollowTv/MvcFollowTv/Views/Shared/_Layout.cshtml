@@ -31,6 +31,15 @@
                     }
                       
                 </div>
+
+                <div class="span8" style="text-align: right">
+                    @using (Html.BeginForm("Search", "Programs", FormMethod.Get, new { id = "searchfield" }))
+                    { 
+                        <label for="filter">Search:</label>
+                        <input id="filter" type="text" name="fieldsValue"/>
+                        <input class="btn primary" id="SearchButton" type="submit" value="Search"/>
+                    }
+                </div>
                 
             </div>
      

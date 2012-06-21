@@ -174,3 +174,15 @@ function scrollFunction() {
         xmlhttp.send();
     }
 }
+
+
+$(function () {
+    $("#filter").keyup(
+        function () {
+            var url = "/" + "Programs/Search?filter=" + document.getElementById("searchfield").fieldsValue.value;
+            $.get(url, function (searchList) {
+                $("#searchfield").fieldsValue.autocomplete({ source: searchList });
+            });
+        }
+    );
+});

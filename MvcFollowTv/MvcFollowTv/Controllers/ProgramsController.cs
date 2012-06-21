@@ -82,6 +82,13 @@ namespace MvcFollowTv.Controllers
             return View("_RecordLines", MvcApplication._progLogic.GetInterval(page, pagesize));
         }
 
+        public ActionResult Search(string filter)
+        {
+            if (filter == null)
+                filter = "";
+
+            return Json(MvcApplication._progLogic.GetSearchResult(filter), JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Episodes(string id)
         {
