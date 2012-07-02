@@ -20,11 +20,18 @@ namespace MvcFollowTv.Controllers
 
         //
         // GET: /Programs/
-        public ActionResult IndexNormal()
+        public ActionResult IndexNormal(string fieldsValue/*name do input*/)
         {
-            IEnumerable<ProgItem> allProgs = MvcApplication._progLogic.GetAllPrograms();
+            if (fieldsValue != null)
+            {
+                return View(MvcApplication._progLogic.GetSearchResult(fieldsValue));
+            }
+            else
+            {
+                IEnumerable<ProgItem> allProgs = MvcApplication._progLogic.GetAllPrograms();
 
-            return View(allProgs);
+                return View(allProgs);
+            }
         }
 
         //
@@ -87,7 +94,9 @@ namespace MvcFollowTv.Controllers
             if (filter == null)
                 filter = "";
 
-            return Json(MvcApplication._progLogic.GetSearchResult(filter), JsonRequestBehavior.AllowGet);
+            //var v = Json(MvcApplication._progLogic.GetSearchResult(filter), JsonRequestBehavior.AllowGet);
+            var v=MvcApplication._progLogic.GetSearchResult(filter);
+            return Json(v, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Episodes(string id)

@@ -54,12 +54,13 @@ namespace Domain.DomainLogin
         }
 
 
-        public IEnumerable<String> GetSearchResult(string filter)
+        public IEnumerable<ProgItem> GetSearchResult(string filter)
         {
             filter = filter.ToUpper();
-            IEnumerable<ProgItem> query = _repository.GetAllPrograms().Where<ProgItem>(c => c.Name.ToUpper().StartsWith(filter));
-            IEnumerable<String> query1 = query.Select(c => c.Name);
-            return query1;
+
+            IEnumerable<ProgItem> query=_repository.GetAllPrograms().Where(c => c.Name.ToUpper().StartsWith(filter)).ToList<ProgItem>();
+           
+            return query;
             
         }
 

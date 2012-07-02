@@ -18,9 +18,9 @@
                         @Html.ActionLink(HttpContext.Current.User.Identity.Name, "Edit", "Account", null, new { @class = "btn primary" })
                         @Html.ActionLink("LogOff", "LogOff", "Account", null, new { @class = "btn large" })
 
-                       //  if (HttpContext.Current.User.IsInRole("Admin"))
-                       //  {
-                                @Html.ActionLink("Users", "Admin", "Account", null, new { @class = "btn large" })
+                        // if (HttpContext.Current.User.IsInRole("Admin"))
+                        // {
+                        //        @Html.ActionLink("Users", "Admin", "Account", null, new { @class = "btn large" })
                         //  }
                          
                     }
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="span8" style="text-align: right">
-                    @using (Html.BeginForm("Search", "Programs", FormMethod.Get, new { id = "searchfield" }))
+                    @using (Html.BeginForm("IndexNormal", "Programs", FormMethod.Get, new { id = "searchfield" }))
                     { 
                         <label for="filter">Search:</label>
                         <input id="filter" type="text" name="fieldsValue"/>
