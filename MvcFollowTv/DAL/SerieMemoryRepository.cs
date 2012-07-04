@@ -84,12 +84,6 @@ namespace DAL
                 {
                     //actualiza campos
 
-                    /*_episode.Acr = fuc.Acr;
-                    _fucproposta.Descricao = fuc.Descricao;
-                    _fucproposta.Opcional = fuc.Opcional;
-                    _fucproposta.Verao = fuc.Verao;
-                    _fucproposta.Creditos = fuc.Creditos;
-                    */
                 }
             }
         }

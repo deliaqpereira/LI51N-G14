@@ -78,8 +78,7 @@ namespace Domain.DomainLogin
             }
 
             return null;
-
-            
+          
         }
 
         public IEnumerable<Episode> GetAllEpisodesFrom(string name)
@@ -106,6 +105,7 @@ namespace Domain.DomainLogin
 
 
         }
+
 
         public void FillRepo()
         {

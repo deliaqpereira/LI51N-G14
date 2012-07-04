@@ -35,12 +35,12 @@
 
                 @if (HttpContext.Current.User.IsInRole("Coord"))
                 {
-                    @Html.ActionLink("Delete", "CancelProposal", new { id = item.Name })
+                    @Html.ActionLink("Delete", "CancelProposal", new { user = item.UsrCreate, id = item.Name })
                 }
 
                 @if (HttpContext.Current.User.IsInRole("Admin"))
                 { 
-                    @Html.ActionLink("Accept"  , "AcceptProposal" , new { id = item.Name }) 
+                    @Html.ActionLink("Accept"  , "AcceptProposal" , new {user=item.UsrCreate, id = item.Name }) 
                 }
 
         </td>

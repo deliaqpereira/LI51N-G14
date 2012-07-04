@@ -195,20 +195,30 @@ namespace MvcFollowTv.Controllers
             return View(serie);
         }
 
-        public ActionResult AccpeptProposal(string id)
+        public ActionResult AcceptProposal(string user, string id)
+        {
+            User u = MvcApplication._userLogic.GetByNickName(user);
+
+            Serie serieOld = MvcApplication._suggest.GetSerie(u, id);
+
+            // move propose to oficial
+            MvcApplication._progLogic.InsertSerie(serieOld);
+
+            MvcApplication._suggest.Remove(u,serieOld);
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CancelProposal(string user, string id)
         {
             User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
 
             Serie serieOld = MvcApplication._suggest.GetSerie(u, id);
 
+            MvcApplication._suggest.Remove(u, serieOld);
 
-            // move propose to oficial
-            MvcApplication._progLogic.InsertSerie(serieOld);
-
-           // MvcApplication._suggest.Remove(serieOld);
-
-
-            return RedirectToAction("ListProposal");
+            return RedirectToAction("Index");
         }
 
     }
