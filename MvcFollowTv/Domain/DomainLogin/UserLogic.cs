@@ -22,6 +22,8 @@ namespace Domain.DomainLogin
             //adicionar user
             _repository.Add(new User { Nickname = "delita", Password = "12345", Email = "herf@isel.pt", Role = new[] { "Admin" }, activated = true });
             _repository.Add(new User { Nickname = "nicola", Password = "12345", Email = "nicola@isel.pt", Role = new[] { "User" }, activated = true });
+            _repository.Add(new User { Nickname = "ping", Password = "12345", Email = "ping@isel.pt", Role = new[] { "Hold" }, activated = false });
+            _repository.Add(new User { Nickname = "pong", Password = "12345", Email = "pong@isel.pt", Role = new[] { "Coord" }, activated = true });
         }
 
         public IEnumerable<User> GetAll()

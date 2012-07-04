@@ -97,6 +97,16 @@ namespace Domain.DomainLogin
             _repository.Add(p, e);                
         }
 
+
+        public void InsertSerie(Serie s)
+        {
+
+            foreach (Episode e in s.repo)
+                Add(s.progItem, e);
+
+
+        }
+
         public void FillRepo()
         {
             ProgItem p = new ProgItem { Name = "CSI-Miami" , Descr="Serie Policial"};

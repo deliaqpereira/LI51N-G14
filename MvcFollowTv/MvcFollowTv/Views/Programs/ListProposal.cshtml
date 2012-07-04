@@ -4,7 +4,7 @@
     ViewBag.Title = "List Proposal";
 }
 
-<h2>List of proposed User</h2>
+<h2>List of proposed programs</h2>
 
 <table>
     <tr>
@@ -30,10 +30,19 @@
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
         <td>
-                @Html.ActionLink("Episodes", "EpisodesProposal"       , new { id = item.Name }) |
-                @Html.ActionLink("Edit"    , "EditProposal"   , new { id = item.Name }) |
-                @Html.ActionLink("Accept"  , "AcceptProposal" , new { id = item.Name }) |
-                @Html.ActionLink("Delete"  , "CancelProposal" , new { id = item.Name })
+                @Html.ActionLink("Episodes", "EpisodesProposal", new { id = item.Name }) |
+                @Html.ActionLink("Edit"    , "EditProposal"   , new { id = item.Name }) 
+
+                @if (HttpContext.Current.User.IsInRole("Coord"))
+                {
+                    @Html.ActionLink("Delete", "CancelProposal", new { id = item.Name })
+                }
+
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                { 
+                    @Html.ActionLink("Accept"  , "AcceptProposal" , new { id = item.Name }) 
+                }
+
         </td>
         }
         

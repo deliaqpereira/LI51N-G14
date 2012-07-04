@@ -101,7 +101,7 @@ namespace MvcFollowTv.Controllers
                         string usr = Hash64.base64Encode(user.Nickname);
                         WebMail.Send(user.Email, "Activação de Acesso",
                                     string.Format("Para activar o seu acesso siga o seguinte link: <a href='{0}/Account/Activate?u={1}&hash={2}'>{0}/Account/Activate?u={1}&hash={2}</a>",
-                                    HttpContext.Request.Headers["host"].Split(':')[0], usr, hash)); // o slip é por causa do apphb meter a porta e depois não funca
+                                    HttpContext.Request.Headers["host"], usr, hash)); 
 
                         TempData["message"] = "Registo criado com sucesso! Verifique a sua caixa de correio electrónico.";
 
@@ -154,7 +154,7 @@ namespace MvcFollowTv.Controllers
                 {
 
                     TempData["exception"] = e.Message;
-                    return RedirectToAction("Index", "v");
+                    return RedirectToAction("Index", "Programs");
 
                 }
             }
@@ -163,10 +163,21 @@ namespace MvcFollowTv.Controllers
             }
         }
 
-      //  [Authorize(Roles = "Admin")]
-        public ActionResult Admin()
+        public ActionResult Admin(String id)
         {
-            return View(MvcApplication._userLogic.GetAll());
+            if (id == null || id.Equals(""))
+            {
+                if (User.IsInRole("User"))
+                {
+                    return RedirectToAction("Index", "Programs");
+                }
+                else
+                {
+                    return View(MvcApplication._userLogic.GetAll());
+                }
+            }
+            else
+                return RedirectToAction("Edit", "Account", id);
         }
 
         [Authorize]
@@ -186,9 +197,15 @@ namespace MvcFollowTv.Controllers
         }
 
         [Authorize]
+        [HttpPost]
         public ActionResult EditUser(User u)
         {
-            return View("Edit");
+            if(u!=null)
+                UpdateModel<User>(u);
+
+            MvcApplication._userLogic.Add(u);
+
+            return RedirectToAction("Index", "Programs");
         }
 
         [Authorize]
@@ -224,7 +241,7 @@ namespace MvcFollowTv.Controllers
             if (User.IsInRole("Admin"))
             {
                 MvcApplication._userLogic.Remove(u.Nickname);
-                return View("Admin");
+                return RedirectToAction("Admin");
             }
             if (User.Identity.Name == u.Nickname)
             {

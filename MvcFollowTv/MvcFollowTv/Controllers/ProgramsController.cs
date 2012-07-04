@@ -157,21 +157,22 @@ namespace MvcFollowTv.Controllers
             User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
             Serie s = MvcApplication._suggest.GetSerie(u, name);
 
-            ViewBag.Index = s.progItem.Name;
+            ViewBag.NameProg = s.progItem.Name;
             return View();
         }
 
         [HttpPost]
         public ActionResult CreateEpisode(string name, Episode e)
         {
-           // p.UsrCreate = User.Identity.Name;
-           // User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
+            
+            User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
+            Serie s = MvcApplication._suggest.GetSerie(u, name);
 
             //actualizar o repositorio de propostas
             if (e.Title == null)
                 e = null;
 
-            //MvcApplication._suggest.Add(u, p, e);
+            MvcApplication._suggest.Add(u, s.progItem, e);
 
             return RedirectToAction("ListProposal");
         }
@@ -192,6 +193,22 @@ namespace MvcFollowTv.Controllers
             Serie serie =MvcApplication._suggest.GetSerie(u, id);
 
             return View(serie);
+        }
+
+        public ActionResult AccpeptProposal(string id)
+        {
+            User u = MvcApplication._userLogic.GetByNickName(User.Identity.Name);
+
+            Serie serieOld = MvcApplication._suggest.GetSerie(u, id);
+
+
+            // move propose to oficial
+            MvcApplication._progLogic.InsertSerie(serieOld);
+
+           // MvcApplication._suggest.Remove(serieOld);
+
+
+            return RedirectToAction("ListProposal");
         }
 
     }

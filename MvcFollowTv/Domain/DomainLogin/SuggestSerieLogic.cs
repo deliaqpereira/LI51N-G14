@@ -13,7 +13,7 @@ namespace Domain.DomainLogin
 
         public SuggestSerieLogic()
         {
-            FillRepo();
+            //FillRepo();
         }
 
         public void FillRepo()
@@ -57,6 +57,12 @@ namespace Domain.DomainLogin
             return s;
         }
 
+        public void Remove(User u, Serie s)
+        {
+           Serie serie = GetSerie(u, s.progItem.Name);
+           _proposta.Remove(u);
+        }
+
         public void Add(User user, ProgItem prog, Episode e)
         {
           //  user = _repoUser.GetByNickName(user.Nickname);
@@ -83,6 +89,8 @@ namespace Domain.DomainLogin
                 {
                     _prog.Descr = prog.Descr;
                     _prog.UsrCreate = prog.UsrCreate;
+
+                    _repo.Add(_prog, e);
 
                 }
             }

@@ -27,7 +27,15 @@ namespace DAL
 
         public void Add(User user)
         {
-            _repoUser.Add(user.Nickname, user);
+            User u = GetByNickName(user.Nickname);
+            if (u == null)
+                _repoUser.Add(user.Nickname, user);
+            else
+            {
+                u.Password = user.Password;
+                u.Image = user.Image;
+                u.Email = user.Email;
+            }
         }
 
         public bool Remove(string nickname)
